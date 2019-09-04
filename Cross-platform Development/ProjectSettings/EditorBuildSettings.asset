@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ButtonClickerScene.unity
+    guid: a14c5f39f3be9e7458f7ded147a9e726
   m_configObjects: {}
