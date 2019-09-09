@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RemoteScript : MonoBehaviour
 {
+	public GameObject UICanvas;
 	public GameObject oculusGo;
 	private bool isVR;
 
@@ -43,14 +44,16 @@ public class RemoteScript : MonoBehaviour
 		}
 		else
 		{
-			Vector3[] points = new Vector3[]
-				{
+			if (UICanvas.GetComponent<Toggle>().Value)
+			{
+				Vector3[] points = new Vector3[]
+					{
 					transform.position,
-					this.transform.position + (this.transform.rotation * transform.forward * lasorPointerLength) 
-				};
+					this.transform.position + (this.transform.rotation * transform.forward * lasorPointerLength)
+					};
 
-			line.SetPositions(points);
-
+				line.SetPositions(points);
+			}
 
 			RaycastHit hit;
 			transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
