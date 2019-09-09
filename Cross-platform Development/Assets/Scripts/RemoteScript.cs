@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class RemoteScript : MonoBehaviour
 {
+	public GameObject oculusGo;
 	private bool isVR;
-    // Start is called before the first frame update
-    void Start()
-    {
-		isVR = Application.platform == RuntimePlatform.Android;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+	public float lasorPointerLength;
+	private LineRenderer line;
+	// Start is called before the first frame update
+	void Start()
+	{
+		isVR = Application.platform == RuntimePlatform.Android;
+		line = GetComponent<LineRenderer>();
+		if (isVR)
+		{
+			oculusGo = transform.gameObject;
+			line.enabled = true;
+		}
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
 		if (!isVR)
 		{
 			if (Input.GetButton/*Down*/("Fire1"))
@@ -25,7 +35,7 @@ public class RemoteScript : MonoBehaviour
 				{
 					if (hit.collider.tag == "Button")
 					{
-						ButtonScript test = hit.collider.transform.parent.gameObject.GetComponent<ButtonScript>();
+						ButtonScript test = hit.collider.transform.gameObject.GetComponent<ButtonScript>();
 						test.OnClick();
 					}
 				}
@@ -33,7 +43,25 @@ public class RemoteScript : MonoBehaviour
 		}
 		else
 		{
+			Vector3[] points = new Vector3[]
+				{
+					transform.position,
+					this.transform.position + (this.transform.rotation * transform.forward * lasorPointerLength) 
+				};
 
+			line.SetPositions(points);
+
+
+			RaycastHit hit;
+			transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+
+			if (Physics.Raycast(transform.position, transform.forward, out hit))
+			{
+				if (hit.transform.gameObject.tag == "Button" && OVRInput.Get(OVRInput.Button.Any))
+				{
+					hit.collider.gameObject.GetComponent<ButtonScript>().OnClick();
+				}
+			}
 		}
 	}
 }
