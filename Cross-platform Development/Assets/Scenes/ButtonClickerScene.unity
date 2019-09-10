@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1102020852}
   - component: {fileID: 1102020850}
   - component: {fileID: 1102020851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Button
   m_TagString: Button
   m_Icon: {fileID: 0}
@@ -363,8 +363,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31efe3389a0e9a54e9be2f67a7c9538e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UICanvas: {fileID: 0}
   oculusGo: {fileID: 0}
-  lasorPointerLength: 5
+  validLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  canShoot: 0
+  lasorPointerLength: 200
 --- !u!120 &1600413810
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -382,7 +387,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0e4dce6450e05c4e92069c7adf9c363, type: 2}
+  - {fileID: 2100000, guid: 501717cde0ef29b4fb7e5739e4bbb4a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -553,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_LocalRotation.x

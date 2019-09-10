@@ -9,9 +9,9 @@ public class ButtonScript : MonoBehaviour
 
 	public void OnClick()
 	{
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < spawnRate; i++)
 		{
-			Instantiate(spawnObject, transform.position + new Vector3(0, 1.2f, 0), /*Quaternion.identity*/Random.rotation);
+			Instantiate(spawnObject, transform.position + new Vector3(0, 1.2f, 0), Quaternion.identity/*Random.rotation*/);
 		}
 	}
 }

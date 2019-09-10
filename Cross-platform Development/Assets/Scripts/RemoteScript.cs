@@ -6,7 +6,10 @@ public class RemoteScript : MonoBehaviour
 {
 	public GameObject UICanvas;
 	public GameObject oculusGo;
+	public LayerMask validLayers;
 	private bool isVR;
+
+	public bool canShoot;
 
 	public float lasorPointerLength;
 	private LineRenderer line;
@@ -39,13 +42,17 @@ public class RemoteScript : MonoBehaviour
 						ButtonScript test = hit.collider.transform.gameObject.GetComponent<ButtonScript>();
 						test.OnClick();
 					}
+					else if (canShoot && hit.transform.gameObject.tag == "Shootable")
+					{
+						Destroy(hit.collider.gameObject);
+					}
 				}
 			}
 		}
 		else
 		{
-			if (UICanvas.GetComponent<Toggle>().Value)
-			{
+			//if (UICanvas.GetComponent<Toggle>().Value)
+			//{
 				Vector3[] points = new Vector3[]
 					{
 					transform.position,
@@ -53,16 +60,20 @@ public class RemoteScript : MonoBehaviour
 					};
 
 				line.SetPositions(points);
-			}
+			//}
 
 			RaycastHit hit;
 			transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 
-			if (Physics.Raycast(transform.position, transform.forward, out hit))
+			if (Physics.Raycast(transform.position, transform.forward, out hit, validLayers) && OVRInput.Get(OVRInput.Button.Any))
 			{
-				if (hit.transform.gameObject.tag == "Button" && OVRInput.Get(OVRInput.Button.Any))
+				if (hit.transform.gameObject.tag == "Button")
 				{
 					hit.collider.gameObject.GetComponent<ButtonScript>().OnClick();
+				}
+				else if (canShoot && hit.transform.gameObject.tag == "Shootable")
+				{
+					Destroy(hit.collider.gameObject);
 				}
 			}
 		}

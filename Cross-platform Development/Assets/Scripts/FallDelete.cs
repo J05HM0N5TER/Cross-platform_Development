@@ -19,4 +19,5 @@ public class FallDelete : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+	
 }
