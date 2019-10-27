@@ -5,13 +5,10 @@ using UnityEngine;
 public class FallDelete : MonoBehaviour
 {
 	public float deleteBorder = -5;
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Delete the capsule when if falls below the deleteBorder Y coordinate
+    /// </summary>
     void Update()
     {
 		if (transform.position.y < deleteBorder)

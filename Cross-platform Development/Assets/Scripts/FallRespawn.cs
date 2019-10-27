@@ -12,8 +12,10 @@ public class FallRespawn : MonoBehaviour
     {
 		respawnPosition = transform.position;
     }
-
-    // Update is called once per frame
+    
+    /// <summary>
+    /// Delete the Object when if falls far enough
+    /// </summary>
     void Update()
     {
 		if (transform.position.y < respawnBorder)

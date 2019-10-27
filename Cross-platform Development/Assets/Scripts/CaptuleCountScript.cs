@@ -6,13 +6,17 @@ public class CaptuleCountScript : MonoBehaviour
 {
 	TextMesh text;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Cache the text mesh
+    /// </summary>
     void Start()
     {
 		text = GetComponent<TextMesh>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Set the display for how many capsules exist at the time
+    /// </summary>
     void Update()
     {
 		text.text = GameObject.FindGameObjectsWithTag("Shootable").Length.ToString();
